@@ -8,17 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v3 # Use stable version
+      uses: actions/checkout@v4 # Use stable version
 
     - name: List Repo Files
       run: ls -ltra
 
     - name: Execute Shell Script
       run: |
-        if [ -f "ascii-script.sh" ]; then
           chmod +x ascii-script.sh
           ./ascii-script.sh
-        else
-          echo "ascii-script.sh not found. Exiting."
-          exit 1
-        fi
+       
