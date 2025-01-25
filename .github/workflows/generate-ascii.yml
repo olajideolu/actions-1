@@ -8,27 +8,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Checkout Repo
-          uses: actions/checkout@v4
+          uses: actions/checkout@v3
             
-        - name: List Repo File
+        - name: List Repo Files
           run: ls -ltra
+
+        - name: Debug Workspace
+          run: ls -R # Debug file structure
 
         - name: Executing Shell Script
           run: |
-            chmod +x ascii-script.sh
-            ./ascii-script.sh
-
-        # - name: Install Cowsay Program
-        #   run: sudo apt-get install cowsay -y
-
-        # - name: Execute Cowsay CMD
-        #   run: cowsay -f dragon "Run for cover, I am a DRAGON...RAWR" >> dragon.txt
-        
-        # - name: Test File Exists
-        #   run: grep -i "dragon" dragon.txt
-
-        # - name: Read File
-        #   run: cat dragon.txt
-
-        # - name: List Repo File
-        #   run: ls -ltrs
+            if [ -f "ascii-script.sh" ]; then
+              chmod +x ascii-script.sh
+              ./ascii-script.sh
+            else
+              echo "ascii-script.sh not found. Exiting."
+              exit 1
+            fi
