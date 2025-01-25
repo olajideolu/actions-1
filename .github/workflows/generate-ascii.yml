@@ -8,13 +8,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v4 # Use stable version
+      uses: actions/checkout@v4
 
     - name: List Repo Files
       run: ls -ltra
 
+    - name: Debug Checkout
+      run: ls -R # Debug file structure
+
     - name: Execute Shell Script
       run: |
+        if [ -f "./ascii-script.sh" ]; then
           chmod +x ascii-script.sh
           ./ascii-script.sh
-       
+        else
+          echo "ascii-script.sh not found. Debugging workspace..."
+          ls -ltra # Debug file existence
+          exit 1
+        fi
